@@ -1,29 +1,29 @@
+from math import floor
+
 from data_keys import level_education_data, region_data, industry_data, job_title_data
 
+ages_strings = [
+        "Under 25",
+        "25-30",
+        "30-35",
+        "35-40",
+        "40-45",
+        "45-50",
+        "50-55",
+        "55-60",
+        "60-65",
+        "Over 65"
+    ]
+
+def get_index_from_age(age):
+    if age < 25:
+        return 0
+    elif age > 65:
+        return len(ages_strings)
+    return (age - 20) / 5
 
 def get_age_category(age):
-    age_category = ""
-    if age < 25:
-        age_category = "Under 25"
-    elif age < 30:
-        age_category = "25-30"
-    elif age < 35:
-        age_category = "30-35"
-    elif age < 40:
-        age_category = "35-40"
-    elif age < 45:
-        age_category = "40-45"
-    elif age < 50:
-        age_category = "45-50"
-    elif age < 55:
-        age_category = "50-55"
-    elif age < 60:
-        age_category = "55-60"
-    elif age < 65:
-        age_category = "60-65"
-    else:
-        age_category = "Over 65"
-    return age_category
+    return ages_strings[floor(get_index_from_age(age))]
 
 
 def get_years_of_experience_category(years_of_experience):
@@ -79,4 +79,5 @@ def get_user_input():
     print_options(level_education_data)
     level_education = input("Please the highest level of education you have from the list above.\n")
 
-    return [age, region, gender, industry, job_title, years_of_experience, num_job_moves, level_education]
+    return [age, region, gender, industry, job_title, years_of_experience, num_job_moves, level_education, age_input,
+            years_of_experience_input]

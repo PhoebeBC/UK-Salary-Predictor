@@ -1,28 +1,11 @@
-import pandas as pd
-import sklearn
-import numpy as np
-import joblib
-from user_input import get_user_input
-from data_keys import get_data_values, get_salary_band
+from suggestion_model import get_best_suggestion
+from running_model import new_data, run_model
 
-# Load the model from the file
-model = joblib.load('random_forest_model.joblib')
-
-#data_entered = get_user_input()
-# Example of new input data (ensure it has the same features as the training data)
-#new_data = get_data_values(data_entered)
-new_data = [1, 0, 0, 0, 0, 0, 1, 2]
-
-feature_names = ['Age', 'Region', 'Sex', 'Industry', 'Job_Title', 'Years_of_Experience', 'Number_of_Job_Moves',
-                    'Level_of_Education']
-single_sample_df = pd.DataFrame([new_data], columns=feature_names)
-# Make predictions
-prediction = model.predict(single_sample_df)
-print(f"This is the prediction:\n{prediction}")
-
-
-# Print predictions
-# for i, prediction in enumerate(predictions):
-#
-salary_band = get_salary_band(int(prediction[0]))
-print(f"Prediction for the single sample: {salary_band}")
+if __name__ == "__main__":
+    # Running the model and printing results
+    user_interpolated_prediction, user_salary_band = run_model(new_data, 1)
+    best_suggestion_prediction, biggest_salary_band, category, num_years = get_best_suggestion()
+    #print(best_suggestion_prediction, biggest_salary_band, category, num_years)
+    if user_interpolated_prediction < best_suggestion_prediction:
+        print(f"If you had an increase in {category} then you could go into the salary band {biggest_salary_band} and be "
+              f"estimated to earn {best_suggestion_prediction}")

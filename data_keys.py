@@ -1,4 +1,6 @@
 def get_data_values(data_list):
+    print(f"this is data_list {data_list}")
+    print(f"this is index {data_list[0]}")
     age = age_data.index(data_list[0])
     region = region_data.index(data_list[1])
     gender = gender_data.index(data_list[2])
