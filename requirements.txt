@@ -6,3 +6,4 @@ six
 tensorflow>=1.15
 keras
 seaborn
+flask
