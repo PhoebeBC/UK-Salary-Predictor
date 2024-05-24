@@ -44,7 +44,7 @@ def run_model(data, print_result=0):
     return interpolated_prediction, salary_band
 
 # Gets user to input data
-#data_entered = get_user_input()
-data_entered = ["25-30", "London", "Female", "Technology", "Software Developer", "2-5", "1", "Master's", 25, 1]
+data_entered = get_user_input()
+#data_entered = ["25-30", "London", "Female", "Technology", "Software Developer", "2-5", "1", "Master's", 25, 1]
 # Taking first 8 values for data to go into model
 new_data = get_data_values(data_entered[:-2])
