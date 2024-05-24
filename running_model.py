@@ -9,7 +9,7 @@ from data_keys import get_data_values, get_salary_band
 FEATURE_NAMES: List[str] = ['Age', 'Region', 'Sex', 'Industry', 'Job_Title', 'Years_of_Experience',
                             'Number_of_Job_Moves', 'Level_of_Education']
 # Load the MODEL from the file
-MODEL = joblib.load('random_forest_MODEL.joblib')
+MODEL = joblib.load('random_forest_model.joblib')
 
 def get_interpolated_prediction(model_prediction, user=0):
     if model_prediction < 4:
