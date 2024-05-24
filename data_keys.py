@@ -14,7 +14,7 @@ job_title_data = ["Software Developer", "Data Scientist", "Financial Analyst", "
 years_of_experience_data = ["Under 2", "2-5", "5-10", "10-20", "Over 20"]
 num_job_moves_data = ["0", "1", "2", "3", "4 Plus"]
 level_education_data = ["High School", "College", "Bachelor's", "Master's", "PhD"]
-salary_band_data = ["Under 30k", "30 - 50k", "50 - 70k", "70 - 90k", "Over 90k"]
+salary_band_data = ["Under £30k", "£30k - £50k", "£50k - £70k", "£70k - £90k", "Over £90k"]
 
 
 def get_data_values(data_list):
@@ -88,6 +88,6 @@ def get_data_values_from_input(data_list):
     for data in data_list:
         int_data_list.append(int(data))
     int_data_list[0] = get_age_category_value(int_data_list[0])
-    int_data_list[5] = get_years_of_experience_category_value(data_list[5])
-    int_data_list[6] = get_job_moves_value(data_list[6])
+    int_data_list[5] = get_years_of_experience_category_value(int_data_list[5])
+    int_data_list[6] = get_job_moves_value(int_data_list[6])
     return int_data_list

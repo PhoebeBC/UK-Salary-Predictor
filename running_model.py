@@ -36,8 +36,8 @@ def make_predictions(df, user=0):
     return prediction, salary_band
 
 
-def run_model(data, print_result=0):
-    df = pd.DataFrame([data], columns=FEATURE_NAMES)
+def run_model(run_data, print_result=0):
+    df = pd.DataFrame([run_data], columns=FEATURE_NAMES)
     prediction, salary_band = make_predictions(df, print_result)
     interpolated_prediction = get_interpolated_prediction(prediction[0], print_result)
     return interpolated_prediction, salary_band

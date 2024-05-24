@@ -11,7 +11,7 @@ app.config["DEBUG"] = True
 # In this case when you add /"some_text" onto the url it will show the message bellow using the value
 # we gave in the url
 @app.route("/<name>")
-def results(name):
+def login(name):
     return f"<h1>{name}</h1>"
 
 
@@ -34,10 +34,11 @@ def questions_answers():
             request.form["age"], #age_input
             request.form["years_experience"]] #years_eperience_input
         new_data = get_data_values_from_input(answers)
+        run_data = new_data[:-2]
         print(f"answers: {new_data}")
-        user_interpolated_prediction, user_salary_band = run_model(new_data[:-2], 1)
+        user_interpolated_prediction, user_salary_band = run_model(run_data, 1)
         return redirect(url_for(
-            "results",
+            "get_results",
             user_interpolated_prediction=user_interpolated_prediction,
             user_salary_band=user_salary_band
         ))
@@ -49,15 +50,15 @@ def questions_answers():
 # if function has params we need to give them just like when we call a function
 # eg url_for("user", name="Admin!") goes to user func and assigning the name variable the
 # string Admin!
-@app.route("/<results>")
+@app.route("/results/<user_interpolated_prediction>/<user_salary_band>")
 def get_results(user_interpolated_prediction, user_salary_band):
-    best_suggestion_prediction, biggest_salary_band, category, num_years = get_best_suggestion()
+    #best_suggestion_prediction, biggest_salary_band, category, num_years = get_best_suggestion(new_data=new_data)
     # print(best_suggestion_prediction, biggest_salary_band, category, num_years)
-    if user_interpolated_prediction < best_suggestion_prediction:
-        print(
-            f"If you had an increase in {category} then you could go into the salary band {biggest_salary_band} and be "
-            f"estimated to earn {best_suggestion_prediction}")
-    return render_template("results.html")
+    # if user_interpolated_prediction < best_suggestion_prediction:
+    #     print(
+    #         f"If you had an increase in {category} then you could go into the salary band {biggest_salary_band} and be "
+    #         f"estimated to earn {best_suggestion_prediction}")
+    return render_template("results.html", salary_band=user_salary_band, interpolated_prediction=user_interpolated_prediction )
 
 
 if __name__ == "__main__":
