@@ -5,18 +5,17 @@ import joblib
 import pandas as pd
 
 from data_keys import get_data_values, get_salary_band
-from user_input import get_user_input
 
 FEATURE_NAMES: List[str] = ['Age', 'Region', 'Sex', 'Industry', 'Job_Title', 'Years_of_Experience',
                             'Number_of_Job_Moves', 'Level_of_Education']
 # Load the MODEL from the file
 MODEL = joblib.load('random_forest_MODEL.joblib')
 
-def get_interpolated_prediction(MODEL_prediction, user=0):
-    if MODEL_prediction < 4:
-        integer = math.floor(MODEL_prediction)
+def get_interpolated_prediction(model_prediction, user=0):
+    if model_prediction < 4:
+        integer = math.floor(model_prediction)
         lower_bound = (20 * integer) + 10
-        interpolation = (MODEL_prediction - integer) * 20
+        interpolation = (model_prediction - integer) * 20
         interpolation_prediction = lower_bound + interpolation
         if user == 1:
             print(f"Interpolation prediction: £{interpolation_prediction}K")
@@ -42,9 +41,3 @@ def run_model(data, print_result=0):
     prediction, salary_band = make_predictions(df, print_result)
     interpolated_prediction = get_interpolated_prediction(prediction[0], print_result)
     return interpolated_prediction, salary_band
-
-# Gets user to input data
-#data_entered = get_user_input()
-data_entered = ["25-30", "London", "Female", "Technology", "Software Developer", "2-5", "1", "Master's", 25, 1]
-# Taking first 8 values for data to go into model
-new_data = get_data_values(data_entered[:-2])

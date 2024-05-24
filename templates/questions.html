@@ -35,11 +35,6 @@
         .section h2 {
             font-size: 1.2em;
         }
-        .results, .suggestion {
-            display: none;
-            padding: 10px;
-            border-top: 2px solid #ddd;
-        }
     </style>
 </head>
 <body>
@@ -49,14 +44,14 @@
             <div class="section">
                 <h2>1) How old are you?</h2>
 <!--                <img src="image1.jpg" alt="Color palette">-->
-                <input id="user_age" class="form-control" type="text" name="q1"
+                <input id="user_age" class="form-control" type="text" name="age"
                        placeholder="Enter your age as a number." required>
             </div>
             <div class="section">
                 <h2>2) Which region do you work in?</h2>
 <!--                <img src="image2.jpg" alt="Colors">-->
-                <select class="custom-select" id="user_region">
-                    <option selected>Choose your region</option>
+                <select class="custom-select" id="user_region" name="region" required>
+                    <option value="">Choose your region</option>
                     <option value="0">London</option>
                     <option value="1">East Midlands</option>
                     <option value="2">South West</option>
@@ -74,8 +69,8 @@
             <div class="section">
                 <h2>3) What is your gender?</h2>
 <!--                <img src="image3.jpg" alt="Eiffel Tower">-->
-                <select class="custom-select" id="user_gender">
-                    <option selected>Choose your gender</option>
+                <select class="custom-select" id="user_gender" name="gender" required>
+                    <option value="">Choose your gender</option>
                     <option value="0">Female</option>
                     <option value="1">Male</option>
                     <option value="2">Other</option>
@@ -84,8 +79,8 @@
             <div class="section">
                 <h2>4) Which industry do you work in?</h2>
 <!--                <img src="image4.jpg" alt="Mars">-->
-                <select class="custom-select" id="user_industry">
-                    <option selected>Choose your industry</option>
+                <select class="custom-select" id="user_industry" name="industry" required>
+                    <option value="">Choose your industry</option>
                     <option value="0">Technology</option>
                     <option value="1">Healthcare</option>
                     <option value="2">Finance</option>
@@ -101,8 +96,8 @@
             <div class="section">
                 <h2>5) Which job title is closest to your own?</h2>
 <!--                <img src="image5.jpg" alt="Water molecule">-->
-                <select class="custom-select" id="user_job_title">
-                    <option selected>Choose your job title</option>
+                <select class="custom-select" id="user_job_title" name="job_title" required>
+                    <option value="">Choose your job title</option>
                     <option value="0">Software Developer</option>
                     <option value="1">Data Scientist</option>
                     <option value="2">Financial Analyst</option>
@@ -128,7 +123,7 @@
             <div class="section">
                 <h2>6) How Many Years of Experience do you have?</h2>
 <!--                <img src="image1.jpg" alt="Color palette">-->
-                <input id="user_experience" class="form-control" type="text" name="experience"
+                <input id="user_experience" class="form-control" type="text" name="years_experience"
                        placeholder="Enter your years of experience as a number." required>
             </div>
             <div class="section">
@@ -140,8 +135,8 @@
             <div class="section">
                 <h2>8) What is your highest level of education?</h2>
 <!--                <img src="image6.jpg" alt="Maple Leaf">-->
-                <select class="custom-select" id="user_level_education">
-                    <option selected>Choose your job title</option>
+                <select class="custom-select" id="user_level_education" name="education_level" required>
+                    <option value="">Choose your job title</option>
                         <option value="0">High School (GCSEs)</option>
                         <option value="1">College (A Level, BTEC, Apprenticeship)</option>
                         <option value="2">Bachelor's Degree</option>
@@ -149,60 +144,8 @@
                         <option value="4">PhD</option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary" onclick="submitquestions()">Submit</button>
+            <input type="submit" class="btn btn-primary" value="submit">
         </form>
-        <div id="results" class="container">
-            <h2>Results</h2>
-            <p>`You scored {{salary_band}} out of {{interpolated_prediction}}.`</p>
         </div>
-        <div id="suggestion" class="container">
-            <h2>Increase your salary?</h2>
-            <p>Would you like to know what you could change, based on the questions above, to increase your salary?</p>
-            <button type="button" class="btn btn-primary" onclick="getsuggestion()">Yes Please!</button>
-        </div>
-    </div>
-
-    <script>
-        function validateForm() {
-            const form = document.getElementById('questionsForm');
-            const formData = new FormData(form);
-
-            for (let [key, value] of formData.entries()) {
-                if (!value) {
-                    alert('Please answer all the questions.');
-                    return false;
-                }
-            }
-
-            submitquestions();
-            return false;  // Prevent form submission to allow custom result handling
-        }
-
-        function submitquestions() {
-            const form = document.getElementById('questionsForm');
-            const results = document.getElementById('results');
-            const scoreText = document.getElementById('score');
-            const formData = new FormData(form);
-            let score = 0;
-            const correctAnswers = {
-                q2: 'Red',
-                q3: 'Paris',
-                q4: 'Mars',
-                q5: 'H2O',
-                q6: 'Canada'
-            };
-
-            for (let [key, value] of formData.entries()) {
-                if (correctAnswers[key] === value) {
-                    score++;
-                }
-            }
-
-            form.style.display = 'none';
-            results.style.display = 'block';
-            suggestion.style.display = 'block';
-            scoreText.textContent = `You scored ${score} out of 5.`;
-        }
-    </script>
 </body>
 </html>

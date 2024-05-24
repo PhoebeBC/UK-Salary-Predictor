@@ -1,4 +1,4 @@
-from user_input import get_age_category, get_years_of_experience_category
+from data_keys import get_age_category_name, get_years_of_experience_category_name
 from running_model import data_entered, new_data, run_model
 
 
@@ -8,13 +8,13 @@ def get_new_age_years_of_experience_values():
         # age variables
         age_entered = data_entered[-2]
         inc_age_entered = age_entered
-        age_category = get_age_category(age_entered)
-        inc_age_category = get_age_category(inc_age_entered)
+        age_category = get_age_category_name(age_entered)
+        inc_age_category = get_age_category_name(inc_age_entered)
         # years of experience variables
         years_of_experience_entered = data_entered[-1]
         inc_years_of_experience_entered = years_of_experience_entered
-        years_of_experience_category = get_years_of_experience_category(years_of_experience_entered)
-        inc_years_of_experience_category = get_years_of_experience_category(inc_years_of_experience_entered)
+        years_of_experience_category = get_years_of_experience_category_name(years_of_experience_entered)
+        inc_years_of_experience_category = get_years_of_experience_category_name(inc_years_of_experience_entered)
         # year counter
         inc_years = 0
         # increasing years until age or years of experiences increases to the next category
@@ -22,8 +22,8 @@ def get_new_age_years_of_experience_values():
             inc_years += 1
             inc_age_entered += 1
             inc_years_of_experience_entered += 1
-            inc_age_category = get_age_category(inc_age_entered)
-            inc_years_of_experience_category = get_years_of_experience_category(inc_years_of_experience_entered)
+            inc_age_category = get_age_category_name(inc_age_entered)
+            inc_years_of_experience_category = get_years_of_experience_category_name(inc_years_of_experience_entered)
         # getting the key for the new category
         inc_age = inc_age_entered
         inc_years_of_experience = inc_years_of_experience_entered

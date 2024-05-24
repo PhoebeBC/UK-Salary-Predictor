@@ -1,29 +1,16 @@
 from math import floor
 
-from data_keys import level_education_data, region_data, industry_data, job_title_data
-
-ages_strings = [
-        "Under 25",
-        "25-30",
-        "30-35",
-        "35-40",
-        "40-45",
-        "45-50",
-        "50-55",
-        "55-60",
-        "60-65",
-        "Over 65"
-    ]
+from data_keys import age_data, level_education_data, region_data, industry_data, job_title_data
 
 def get_index_from_age(age):
     if age < 25:
         return 0
     elif age > 65:
-        return len(ages_strings)
+        return len(age_data)
     return (age - 20) / 5
 
 def get_age_category(age):
-    return ages_strings[floor(get_index_from_age(age))]
+    return age_data[floor(get_index_from_age(age))]
 
 
 def get_years_of_experience_category(years_of_experience):
